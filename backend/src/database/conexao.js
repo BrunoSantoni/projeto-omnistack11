@@ -1,6 +1,9 @@
 const knex = require('knex')
-const config = require('../../knexfile') //Importando a configuração do banco
+const configuracao = require('../../knexfile') //Importando a configuração do banco
 
-const conexao = knex(config.development) //Usando a conexão de desenvolvimento
+const config = process.env.NODE_ENV === 'test' ? configuracao.test : configuracao.development
+//Pegou o valor da variável ambiente
+
+const conexao = knex(config) //Usando a conexão de desenvolvimento
 
 module.exports = conexao
